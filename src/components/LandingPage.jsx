@@ -1,44 +1,32 @@
-// LandingPage.jsx
 import React, { useState } from 'react';
 import RequestModal from './RequestModal';
+import ExpertSignupModal from './auth/ExpertSignupModal';
 
 const LandingPage = () => {
-  const [modalConfig, setModalConfig] = useState({
-    isOpen: false,
-    title: '',
-    formUrl: ''
-  });
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
 
-  const handleOpenModal = (type) => {
-    const config = {
-      demo: {
-        title: 'Request a Demo',
-        formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScRJfUaAi3KApHHr5CZSZzKu-AKsjV_TfIMkOs1SqFrwYHXbg/viewform?embedded=true'
-      },
-      expert: {
-        title: 'Become an Expert',
-        formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfEVp2faap96ZZ4QAO2X_KOFVRaA_OULTvaqp_e5i4GARycZA/viewform?embedded=true'
-      }
-    };
-
-    setModalConfig({
-      isOpen: true,
-      ...config[type]
-    });
+  const handleOpenDemoModal = () => {
+    setIsDemoModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setModalConfig({
-      isOpen: false,
-      title: '',
-      formUrl: ''
-    });
+  const handleCloseDemoModal = () => {
+    setIsDemoModalOpen(false);
+  };
+
+  const handleOpenExpertModal = () => {
+    setIsExpertModalOpen(true);
+  };
+
+  const handleCloseExpertModal = () => {
+    setIsExpertModalOpen(false);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-screen flex items-start">
         <div className="grid lg:grid-cols-12 gap-12 items-start pt-12">
+          {/* Your existing content */}
           <div className="lg:col-span-7 space-y-8">
             <div className="relative">
               <div className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-900 to-purple-600 bg-clip-text text-transparent">
@@ -54,7 +42,7 @@ const LandingPage = () => {
             
             <div className="pt-8 flex gap-4">
               <button 
-                onClick={() => handleOpenModal('demo')}
+                onClick={handleOpenDemoModal}
                 className="px-8 py-4 bg-purple-900 text-white text-lg font-medium rounded-full 
                            shadow-lg hover:bg-purple-800 focus:outline-none focus:ring-2 
                            focus:ring-purple-900 focus:ring-offset-2 transition-all duration-300
@@ -63,7 +51,7 @@ const LandingPage = () => {
                 Request a Demo
               </button>
               <button 
-                onClick={() => handleOpenModal('expert')}
+                onClick={handleOpenExpertModal}
                 className="px-8 py-4 bg-purple-900 text-white text-lg font-medium rounded-full 
                            shadow-lg hover:bg-purple-800 focus:outline-none focus:ring-2 
                            focus:ring-purple-900 focus:ring-offset-2 transition-all duration-300
@@ -74,6 +62,7 @@ const LandingPage = () => {
             </div>
           </div>
 
+          {/* Rest of your existing content */}
           <div className="lg:col-span-5">
             <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-purple-100">
               <p className="text-xl text-gray-600 leading-relaxed">
@@ -90,11 +79,16 @@ const LandingPage = () => {
         </div>
       </div>
 
+      {/* Modals */}
       <RequestModal 
-        isOpen={modalConfig.isOpen}
-        onClose={handleCloseModal}
-        title={modalConfig.title}
-        formUrl={modalConfig.formUrl}
+        isOpen={isDemoModalOpen}
+        onClose={handleCloseDemoModal}
+        title="Request a Demo"
+        formUrl="https://docs.google.com/forms/d/e/1FAIpQLScRJfUaAi3KApHHr5CZSZzKu-AKsjV_TfIMkOs1SqFrwYHXbg/viewform?embedded=true"
+      />
+      <ExpertSignupModal 
+        isOpen={isExpertModalOpen}
+        onClose={handleCloseExpertModal}
       />
     </div>
   );
