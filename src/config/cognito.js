@@ -1,11 +1,11 @@
 export const cognitoConfig = {
-    region: 'us-east-2',
-    userPoolId: 'us-east-2_rhMIWwTOV',
-    userPoolWebClientId: '68fu2q3m78m6ckerorigdgcdru',
-    authenticationFlowType: 'USER_PASSWORD_AUTH',
-    signUpConfig: {
-      autoConfirmUser: false,
-      autoVerifyEmail: true,
-      autoVerifyPhone: false
-    }
-  };
+  region: import.meta.env.VITE_COGNITO_REGION,
+  userPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
+  userPoolWebClientId: import.meta.env.VITE_COGNITO_USER_POOL_CLIENT_ID,
+  authenticationFlowType: 'USER_PASSWORD_AUTH',
+  signUpConfig: {
+    autoConfirmUser: false,
+    autoVerifyEmail: true,
+    autoVerifyPhone: false
+  }
+};
