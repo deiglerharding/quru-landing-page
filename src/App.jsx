@@ -13,11 +13,6 @@ Amplify.configure({
   }
 });
 
-console.log('Cognito Config:', {
-  region: import.meta.env.VITE_COGNITO_REGION,
-  userPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
-  userPoolWebClientId: import.meta.env.VITE_COGNITO_USER_POOL_CLIENT_ID,
-});
 
 function App() {
   return <LandingPage />
