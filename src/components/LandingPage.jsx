@@ -134,8 +134,8 @@ const LandingPage = () => {
         {/* Scroll indicator */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center hidden md:flex">
           <p className="text-xs text-gray-500 mb-1">Scroll to explore learn more</p>
-          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+          <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 16 16">
+            <path d="M2 5 L8 11 L14 5" stroke="currentColor" strokeWidth="2" />
           </svg>
         </div>
       </div>
