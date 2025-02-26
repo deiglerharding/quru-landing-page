@@ -5,6 +5,7 @@ import ExpertSignupModal from './auth/ExpertSignupModal';
 import ProcessSection from './sections/ProcessSection';
 import ComplianceSection from './sections/ComplianceSection';
 import AboutSection from './sections/AboutSection';
+import SectionDivider from './sections/SectionDivider';
 import ReactGA from 'react-ga4';
 
 const LandingPage = () => {
@@ -141,7 +142,9 @@ const LandingPage = () => {
 
       {/* New sections */}
       <ProcessSection />
+      <SectionDivider />
       <ComplianceSection />
+      <SectionDivider />
       <AboutSection />
 
       {/* Modals */}

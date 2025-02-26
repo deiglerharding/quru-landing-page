@@ -3,13 +3,13 @@ import React from 'react';
 
 const ComplianceSection = () => {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-purple-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Best-in-Class <span className="text-purple-900">Compliance</span>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Best-in-Class <span className="text-purple-200">Compliance</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-purple-100 max-w-3xl mx-auto">
             We've built comprehensive compliance protocols into every aspect of our platform.
           </p>
         </div>
