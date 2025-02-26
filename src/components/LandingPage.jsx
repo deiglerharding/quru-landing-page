@@ -1,6 +1,10 @@
+// src/components/LandingPage.jsx
 import React, { useState } from 'react';
 import RequestModal from './RequestModal';
 import ExpertSignupModal from './auth/ExpertSignupModal';
+import ProcessSection from './sections/ProcessSection';
+import ComplianceSection from './sections/ComplianceSection';
+import AboutSection from './sections/AboutSection';
 import ReactGA from 'react-ga4';
 
 const LandingPage = () => {
@@ -8,14 +12,11 @@ const LandingPage = () => {
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
   const [prefillLinkedIn, setPrefillLinkedIn] = useState('');
 
-
-
   // Check if URL is /become-an-expert and open modal
   React.useEffect(() => {
     console.log("LandingPage useEffect running");
     const path = window.location.pathname;
     console.log("Current path:", path);
-
         
     // Track page view
     ReactGA.send({ hitType: "pageview", page: path });
@@ -45,7 +46,6 @@ const LandingPage = () => {
       
       setIsExpertModalOpen(true);
     }
-
   }, []);
 
   const handleOpenDemoModal = () => {
@@ -78,7 +78,7 @@ const LandingPage = () => {
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-screen flex items-start">
         <div className="grid lg:grid-cols-12 gap-12 items-start pt-12">
-          {/* Your existing content */}
+          {/* Hero section content */}
           <div className="lg:col-span-7 space-y-8">
             <div className="relative">
               <div className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-900 to-purple-600 bg-clip-text text-transparent">
@@ -114,7 +114,7 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Rest of your existing content */}
+          {/* Hero right panel */}
           <div className="lg:col-span-5">
             <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-purple-100">
               <p className="text-xl text-gray-600 leading-relaxed">
@@ -129,7 +129,20 @@ const LandingPage = () => {
             <div className="absolute -z-10 right-48 top-1/3 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply opacity-10 animate-blob animation-delay-2000"></div>
           </div>
         </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center hidden md:flex">
+          <p className="text-xs text-gray-500 mb-1">Scroll to explore learn more</p>
+          <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+          </svg>
+        </div>
       </div>
+
+      {/* New sections */}
+      <ProcessSection />
+      <ComplianceSection />
+      <AboutSection />
 
       {/* Modals */}
       <RequestModal 
