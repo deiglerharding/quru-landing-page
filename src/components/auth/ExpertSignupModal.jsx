@@ -371,6 +371,10 @@ const ExpertSignupModal = ({ isOpen, onClose, prefillLinkedIn = '' }) => {
               >
                 {loading ? 'Signing up...' : 'Sign Up'}
               </button>
+              
+              <p className="text-xs text-gray-500 text-center mt-3">
+                By clicking "Sign Up" you agree to accept our <a href="https://terms-and-conditions.quru.ai/" target="_blank" rel="noopener noreferrer" className="text-purple-900 hover:text-purple-800 underline">terms and conditions</a>.
+              </p>
             </div>
           </form>
         </div>
