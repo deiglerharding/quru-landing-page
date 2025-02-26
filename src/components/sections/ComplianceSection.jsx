@@ -1,3 +1,4 @@
+// src/components/sections/ComplianceSection.jsx
 import React from 'react';
 
 const ComplianceSection = () => {
@@ -21,7 +22,7 @@ const ComplianceSection = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Trained Personnel</h3>
+            <h3 className="text-xl font-bold text-purple-900 mb-3">Trained Personnel</h3>
             <p className="text-gray-600">
               All employees and experts undergo rigorous compliance training to ensure adherence to industry regulations and best practices.
             </p>
@@ -34,7 +35,7 @@ const ComplianceSection = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Custom Compliance Portal</h3>
+            <h3 className="text-xl font-bold text-purple-900 mb-3">Custom Compliance Portal</h3>
             <p className="text-gray-600">
               Our clients have access to a dedicated compliance portal that provides transparency and control over their data and interactions.
             </p>
@@ -47,7 +48,7 @@ const ComplianceSection = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">MNPI Screening</h3>
+            <h3 className="text-xl font-bold text-purple-900 mb-3">MNPI Screening</h3>
             <p className="text-gray-600">
               We screen all questions and answers for potential Material Non-Public Information (MNPI) with a thorough human-in-the-loop verification process.
             </p>

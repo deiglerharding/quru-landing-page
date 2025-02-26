@@ -51,7 +51,9 @@ const ProcessSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Process</h2>
+          <h2 className="text-4xl font-bold text-purple-900 mb-4">
+            Our Process
+          </h2>
           <p className="text-xl text-gray-600">
             Automating Expert Diligence from Inquiry to Insight
           </p>
@@ -69,7 +71,7 @@ const ProcessSection = () => {
                 {step.icon}
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
+                <h3 className="text-xl font-bold text-purple-900 mb-2">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
               </div>
             </div>
@@ -78,7 +80,7 @@ const ProcessSection = () => {
         
         {/* Three benefit cards */}
         <div className="grid md:grid-cols-3 gap-8 mt-16">
-          <div className="bg-purple-50 rounded-3xl p-8 shadow-lg">
+          <div className="bg-gradient-to-br from-purple-50 to-white rounded-3xl p-8 shadow-lg border border-purple-100">
             <h3 className="text-xl font-bold text-purple-900 mb-4">Effortless Access to Expert Insights</h3>
             <p className="text-gray-700">
               We've reengineered expert calls so you can avoid wasting hours on sourcing and scheduling. 
@@ -86,7 +88,7 @@ const ProcessSection = () => {
             </p>
           </div>
           
-          <div className="bg-purple-50 rounded-3xl p-8 shadow-lg">
+          <div className="bg-gradient-to-br from-purple-50 to-white rounded-3xl p-8 shadow-lg border border-purple-100">
             <h3 className="text-xl font-bold text-purple-900 mb-4">Matching You with the Perfect Experts</h3>
             <p className="text-gray-700">
               QuruAI maintains a deep knowledge base of each expert's background, using machine learning 
@@ -94,7 +96,7 @@ const ProcessSection = () => {
             </p>
           </div>
           
-          <div className="bg-purple-50 rounded-3xl p-8 shadow-lg">
+          <div className="bg-gradient-to-br from-purple-50 to-white rounded-3xl p-8 shadow-lg border border-purple-100">
             <h3 className="text-xl font-bold text-purple-900 mb-4">Compliance at Every Step</h3>
             <p className="text-gray-700">
               QuruAI automatically screens each question, expert, and response for potential risks—before 
