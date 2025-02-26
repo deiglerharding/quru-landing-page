@@ -196,7 +196,7 @@ const ExpertSignupModal = ({ isOpen, onClose, prefillLinkedIn = '' }) => {
 
         <div className="p-6 border-b">
           <h3 className="text-xl font-semibold text-gray-900">
-            Become an Expert
+            Sign Up for QuruAI
           </h3>
         </div>
 

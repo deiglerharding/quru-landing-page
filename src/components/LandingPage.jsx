@@ -21,7 +21,7 @@ const LandingPage = () => {
     ReactGA.send({ hitType: "pageview", page: path });
     
     // Check if the path starts with /become-an-expert
-    if (path.startsWith('/become-an-expert')) {
+    if (path.startsWith('/become-an-expert') || path.startsWith('/consult')) {
       // Extract LinkedIn URL if present
       const match = path.match(/\/become-an-expert\/(.+)/);
 
@@ -45,6 +45,7 @@ const LandingPage = () => {
       
       setIsExpertModalOpen(true);
     }
+
   }, []);
 
   const handleOpenDemoModal = () => {
