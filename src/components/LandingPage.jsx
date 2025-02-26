@@ -1,20 +1,36 @@
 import React, { useState } from 'react';
 import RequestModal from './RequestModal';
 import ExpertSignupModal from './auth/ExpertSignupModal';
+import ReactGA from 'react-ga4';
 
 const LandingPage = () => {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
   const [prefillLinkedIn, setPrefillLinkedIn] = useState('');
 
+
+
   // Check if URL is /become-an-expert and open modal
   React.useEffect(() => {
+    console.log("LandingPage useEffect running");
     const path = window.location.pathname;
+    console.log("Current path:", path);
+
+        
+    // Track page view
+    ReactGA.send({ hitType: "pageview", page: path });
     
     // Check if the path starts with /become-an-expert
     if (path.startsWith('/become-an-expert')) {
       // Extract LinkedIn URL if present
       const match = path.match(/\/become-an-expert\/(.+)/);
+
+      ReactGA.event({
+        category: 'Expert',
+        action: 'Page View',
+        label: match ? 'LinkedIn Referral' : 'Direct Link',
+      });
+
       if (match && match[1]) {
         // Decode the URL part (it might be URL encoded)
         let linkedInUrl = decodeURIComponent(match[1]);

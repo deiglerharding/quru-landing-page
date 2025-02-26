@@ -3,6 +3,8 @@ import { signUp } from 'aws-amplify/auth';
 import { Alert, AlertDescription } from '../../components/ui/alert';
 import { prefixOptions, countryOptions } from '../../constants/options';
 import VerificationModal from './VerificationModal';
+import ReactGA from 'react-ga4';
+
 
 // Extended country codes mapping
 const countryCodes = {
@@ -159,6 +161,13 @@ const ExpertSignupModal = ({ isOpen, onClose, prefillLinkedIn = '' }) => {
           },
           autoSignIn: true
         }
+      });
+
+      // Track successful signup
+      ReactGA.event({
+        category: 'Expert',
+        action: 'Signup Completed',
+        label: formData.referralSource || 'Not Specified'
       });
   
       setSuccess(true);

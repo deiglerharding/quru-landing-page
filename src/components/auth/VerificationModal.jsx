@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { confirmSignUp } from 'aws-amplify/auth';
 import { Alert, AlertDescription } from '../ui/alert';
+import ReactGA from 'react-ga4';
+
 
 const VerificationModal = ({ isOpen, onClose, email, onVerificationSuccess }) => {
   const [verificationCode, setVerificationCode] = useState('');
@@ -17,10 +19,23 @@ const VerificationModal = ({ isOpen, onClose, email, onVerificationSuccess }) =>
         username: email,
         confirmationCode: verificationCode
       });
-      
+
+      // Track verification success
+      ReactGA.event({
+        category: 'Expert',
+        action: 'Verification Completed',
+        label: email
+      });
+    
       onVerificationSuccess();
       window.location.href = 'https://expert.quru.ai/';
     } catch (error) {
+      // Track verification error
+      ReactGA.event({
+        category: 'Expert',
+        action: 'Verification Error',
+        label: error.message || 'Unknown Error'
+      });
       console.error('Error confirming signup:', error);
       setError(error.message || 'Failed to verify code');
     } finally {
