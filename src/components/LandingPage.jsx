@@ -5,10 +5,28 @@ import ExpertSignupModal from './auth/ExpertSignupModal';
 const LandingPage = () => {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
+  const [prefillLinkedIn, setPrefillLinkedIn] = useState('');
 
   // Check if URL is /become-an-expert and open modal
   React.useEffect(() => {
-    if (window.location.pathname === '/become-an-expert') {
+    const path = window.location.pathname;
+    
+    // Check if the path starts with /become-an-expert
+    if (path.startsWith('/become-an-expert')) {
+      // Extract LinkedIn URL if present
+      const match = path.match(/\/become-an-expert\/(.+)/);
+      if (match && match[1]) {
+        // Decode the URL part (it might be URL encoded)
+        let linkedInUrl = decodeURIComponent(match[1]);
+        
+        // Add https:// prefix if it doesn't have a protocol
+        if (!linkedInUrl.startsWith('http')) {
+          linkedInUrl = 'https://' + linkedInUrl;
+        }
+        
+        setPrefillLinkedIn(linkedInUrl);
+      }
+      
       setIsExpertModalOpen(true);
     }
   }, []);
@@ -106,6 +124,7 @@ const LandingPage = () => {
       <ExpertSignupModal 
         isOpen={isExpertModalOpen}
         onClose={handleCloseExpertModal}
+        prefillLinkedIn={prefillLinkedIn}
       />
     </div>
   );

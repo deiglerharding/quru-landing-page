@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { signUp } from 'aws-amplify/auth';
 import { Alert, AlertDescription } from '../../components/ui/alert';
 import { prefixOptions, countryOptions } from '../../constants/options';
@@ -28,7 +28,7 @@ const countryCodes = {
   'nz': '64'    // New Zealand
 };
 
-const ExpertSignupModal = ({ isOpen, onClose }) => {
+const ExpertSignupModal = ({ isOpen, onClose, prefillLinkedIn = '' }) => {
   const [formData, setFormData] = useState({
     prefix: '',
     firstName: '',
@@ -46,6 +46,17 @@ const ExpertSignupModal = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
+
+  // Effect to set LinkedIn profile when prefillLinkedIn prop changes
+  useEffect(() => {
+    if (prefillLinkedIn) {
+      setFormData(prev => ({
+        ...prev,
+        linkedinProfile: prefillLinkedIn
+      }));
+    }
+  }, [prefillLinkedIn]);
+
   // Function to format phone number to E.164
   const formatPhoneNumber = (rawNumber, countryCode) => {
     // Remove all non-digit characters
