@@ -7,6 +7,7 @@ import ComplianceSection from './sections/ComplianceSection';
 import AboutSection from './sections/AboutSection';
 import ExpertsSection from './sections/ExpertsSection';
 import SectionDivider from './sections/SectionDivider';
+import TopNavigationBar from './TopNavigationBar';
 import ReactGA from 'react-ga4';
 
 const LandingPage = () => {
@@ -75,17 +76,12 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100">
-      <div className="absolute top-6 right-6">
-        <a
-          href="https://expert.quru.ai"
-          className="inline-flex items-center px-6 py-2.5 bg-white text-purple-900 text-sm font-medium rounded-full 
-                    shadow-md hover:shadow-lg hover:bg-purple-50 focus:outline-none focus:ring-2 
-                    focus:ring-purple-900 focus:ring-offset-2 transition-all duration-300 border border-purple-200"
-        >
-          Already an Expert?
-        </a>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-screen flex items-start">
+      {/* Add top navigation bar */}
+      <TopNavigationBar />
+      
+      {/* Add padding-top to account for fixed navbar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-screen flex items-start pt-20">
+        {/* Remove the "Already an Expert?" button since it's now in the navbar */}
         <div className="grid lg:grid-cols-12 gap-12 items-start pt-12">
           {/* Hero section content */}
           <div className="lg:col-span-7 space-y-8">
@@ -148,14 +144,22 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* New sections */}
-      <ProcessSection />
+      {/* Add section IDs for navigation */}
+      <div id="product-section">
+        <ProcessSection />
+      </div>
       <SectionDivider />
-      <ComplianceSection />
+      <div id="compliance-section">
+        <ComplianceSection />
+      </div>
       <SectionDivider />
-      <AboutSection />
+      <div id="about-section">
+        <AboutSection />
+      </div>
       <SectionDivider />
-      <ExpertsSection onOpenExpertModal={handleOpenExpertModal} />
+      <div id="experts-section">
+        <ExpertsSection onOpenExpertModal={handleOpenExpertModal} />
+      </div>
 
       {/* Modals */}
       <RequestModal 
