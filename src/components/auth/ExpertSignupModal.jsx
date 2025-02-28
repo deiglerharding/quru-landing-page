@@ -183,7 +183,7 @@ const ExpertSignupModal = ({ isOpen, onClose, prefillLinkedIn = '' }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000]">
       <div className="bg-white rounded-lg w-full max-w-2xl h-[90vh] flex flex-col relative">
         <button
           onClick={onClose}

@@ -155,7 +155,7 @@ const Footer = () => {
         
         {/* Secondary footer */}
         <div className="mt-8 pt-4 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
-         
+            
         </div>
       </div>
     </footer>

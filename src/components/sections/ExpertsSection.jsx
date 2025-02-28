@@ -81,7 +81,7 @@ const ExpertsSection = ({ onOpenExpertModal }) => {
           >
             Join Our Expert Network
           </button>
-          <p className="text-gray-500 mt-4">No minimum time commitment required</p>
+          <p className="text-xs text-gray-500 mt-4">No minimum time commitment required</p>
         </div>
       </div>
     </section>
