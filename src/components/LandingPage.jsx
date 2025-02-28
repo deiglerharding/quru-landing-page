@@ -7,7 +7,10 @@ import ComplianceSection from './sections/ComplianceSection';
 import AboutSection from './sections/AboutSection';
 import ExpertsSection from './sections/ExpertsSection';
 import SectionDivider from './sections/SectionDivider';
+import Footer from './sections/Footer';
+
 import TopNavigationBar from './TopNavigationBar';
+import KnowledgeFlowVisualization from './visuals/KnowledgeFlowVisualization';
 import ReactGA from 'react-ga4';
 
 const LandingPage = () => {
@@ -79,25 +82,27 @@ const LandingPage = () => {
       {/* Add top navigation bar */}
       <TopNavigationBar />
       
-      {/* Add padding-top to account for fixed navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 min-h-screen flex items-start pt-20">
-        {/* Remove the "Already an Expert?" button since it's now in the navbar */}
-        <div className="grid lg:grid-cols-12 gap-12 items-start pt-12">
-          {/* Hero section content */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="relative">
-              <div className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-900 to-purple-600 bg-clip-text text-transparent">
-                QuruAI
-              </div>
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-200 rounded-full opacity-20 blur-xl"></div>
-            </div>
-            
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-              Revolutionizing investment research with{' '}
-              <span className="text-purple-900">AI-powered</span> expert diligence
+      {/* Hero section with left-aligned content and right visual element */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-screen flex items-center pt-32 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
+          {/* Left side content */}
+          <div className="flex flex-col justify-center space-y-8 max-w-2xl">
+            {/* Headline with highlighted word */}
+            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              Streamline your expert <br />
+              research from <span className="text-purple-600">inquiry</span> <br />
+              to insight
             </h1>
             
-            <div className="pt-8 flex gap-4">
+            {/* Subtext */}
+            <p className="text-xl text-gray-600 leading-relaxed pr-4">
+              Drive smarter research outcomes with our AI-powered platform that eliminates the logistical 
+              headaches of traditional expert networks and instantly connects you with the best experts 
+              for your research needs
+            </p>
+            
+            {/* Buttons - left aligned */}
+            <div className="pt-4 flex gap-4">
               <button 
                 onClick={handleOpenDemoModal}
                 className="px-8 py-4 bg-purple-900 text-white text-lg font-medium rounded-full 
@@ -105,12 +110,12 @@ const LandingPage = () => {
                            focus:ring-purple-900 focus:ring-offset-2 transition-all duration-300
                            hover:shadow-purple-200 hover:shadow-xl transform hover:-translate-y-1"
               >
-                Request a Demo
+                Get Started
               </button>
               <button 
                 onClick={handleOpenExpertModal}
-                className="px-8 py-4 bg-purple-900 text-white text-lg font-medium rounded-full 
-                           shadow-lg hover:bg-purple-800 focus:outline-none focus:ring-2 
+                className="px-8 py-4 bg-white text-purple-900 border border-purple-900 text-lg font-medium rounded-full 
+                           shadow-lg hover:bg-purple-50 focus:outline-none focus:ring-2 
                            focus:ring-purple-900 focus:ring-offset-2 transition-all duration-300
                            hover:shadow-purple-200 hover:shadow-xl transform hover:-translate-y-1"
               >
@@ -119,28 +124,18 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Hero right panel */}
-          <div className="lg:col-span-5">
-            <div className="bg-white/70 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-purple-100">
-              <p className="text-xl text-gray-600 leading-relaxed">
-                The QuruAI platform automates the entire expert diligence process—from expert 
-                selection and call completion to insight analysis. Simply submit an inquiry 
-                and receive actionable results, freeing you from logistical headaches and 
-                enabling faster, more strategic decision-making.
-              </p>
+          {/* Right side visual element */}
+          {/* Right side visual element */}
+          <div className="hidden lg:flex items-center justify-center relative">
+            {/* Background blob shapes for added depth */}
+            <div className="absolute -top-20 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply opacity-20 animate-blob"></div>
+            <div className="absolute -bottom-10 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply opacity-10 animate-blob animation-delay-2000"></div>
+            
+            {/* Knowledge Flow Visualization */}
+            <div className="relative z-10 w-full h-96">
+              <KnowledgeFlowVisualization />
             </div>
-
-            <div className="absolute -z-10 right-0 top-1/2 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply opacity-10 animate-blob"></div>
-            <div className="absolute -z-10 right-48 top-1/3 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply opacity-10 animate-blob animation-delay-2000"></div>
           </div>
-        </div>
-        
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center hidden md:flex">
-          <p className="text-xs text-gray-500 mb-1">Scroll to learn more</p>
-          <svg className="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 16 16">
-            <path d="M2 5 L8 11 L14 5" stroke="currentColor" strokeWidth="2" />
-          </svg>
         </div>
       </div>
 
@@ -160,6 +155,8 @@ const LandingPage = () => {
       <div id="experts-section">
         <ExpertsSection onOpenExpertModal={handleOpenExpertModal} />
       </div>
+
+      <Footer />
 
       {/* Modals */}
       <RequestModal 
