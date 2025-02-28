@@ -52,10 +52,10 @@ const ProcessSection = () => {
         {/* Section header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl font-bold text-purple-900 mb-4">
-            Our Process
+            Our Platform
           </h2>
           <p className="text-xl text-gray-600">
-            Automating Expert Diligence from Inquiry to Insight
+            It's never been easier to go from question to answer.
           </p>
         </div>
 

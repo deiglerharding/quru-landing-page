@@ -50,7 +50,14 @@ const LandingPage = () => {
   }, []);
 
   const handleOpenDemoModal = () => {
-    setIsDemoModalOpen(true);
+    // Open Calendly link in a new tab
+    window.open('https://calendly.com/wes-quruai/30min', '_blank');
+    
+    // Track demo link click with ReactGA
+    ReactGA.event({
+      category: 'Demo',
+      action: 'Calendly Link Clicked',
+    });
   };
 
   const handleCloseDemoModal = () => {

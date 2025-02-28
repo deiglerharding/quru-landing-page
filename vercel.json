@@ -8,7 +8,7 @@
     "redirects": [
       {
         "source": "/demo",
-        "destination": "https://calendly.com/wes-quruai/30min?month=2025-02",
+        "destination": "https://calendly.com/wes-quruai/30min",
         "permanent": false
       }
     ]
