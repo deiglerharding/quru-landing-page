@@ -18,10 +18,10 @@ const ExpertsSection = ({ onOpenExpertModal }) => {
   const testimonials = [
     {
       quote: "I can share my expertise at any hour that works for me. No more scheduling headaches or time zone challenges.",
-      author: "Sarah K., Financial Analyst"
+      author: "Sarah K., Sales Lead"
     },
     {
-      quote: "AI consultation lets me fit 20-minute sessions between meetings or during commutes instead of scheduling full hours.",
+      quote: "AI consultation lets me fit short sessions between meetings or during commutes instead of scheduling full hours.",
       author: "Michael T., Healthcare Executive"
     },
     {

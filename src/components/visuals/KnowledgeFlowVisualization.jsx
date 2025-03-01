@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const KnowledgeFlowVisualization = () => {
   const [animationState, setAnimationState] = useState('initial');
-  const [expertNodesActive, setExpertNodesActive] = useState([false, false, false, false, false]);
+  const [expertCount, setExpertCount] = useState(5);
+  const [expertNodesActive, setExpertNodesActive] = useState(Array(5).fill(false));
   const [showLightbulb, setShowLightbulb] = useState(false); // State for lightbulb transformation
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
@@ -16,7 +17,7 @@ const KnowledgeFlowVisualization = () => {
     }, 1500);
 
     // Activate expert nodes one by one
-    const activateNodes = expertNodesActive.map((_, index) => {
+    const activateNodes = Array(expertCount).fill(0).map((_, index) => {
       return setTimeout(() => {
         setExpertNodesActive(prev => {
           const newState = [...prev];
@@ -39,8 +40,12 @@ const KnowledgeFlowVisualization = () => {
 
     // Reset and restart the animation
     const resetTimer = setTimeout(() => {
+      // Randomize the number of expert nodes (between 2 and 8)
+      const newExpertCount = Math.floor(Math.random() * 10) + 2; // Random number between 2 and 8
+      
       setAnimationState('initial');
-      setExpertNodesActive([false, false, false, false, false]);
+      setExpertCount(newExpertCount);
+      setExpertNodesActive(Array(newExpertCount).fill(false));
       setShowLightbulb(false); // Reset lightbulb state
     }, 10000);
 
@@ -51,7 +56,7 @@ const KnowledgeFlowVisualization = () => {
       clearTimeout(completionTimer);
       clearTimeout(resetTimer);
     };
-  }, [animationState === 'initial']);
+  }, [animationState === 'initial', expertCount]);
 
   // Easing function for smooth animations
   function easeInOutQuad(t) {
@@ -75,7 +80,6 @@ const KnowledgeFlowVisualization = () => {
     // Expert node positions (in circular arrangement)
     const expertPositions = [];
     const radius = Math.min(width, height) * 0.35;
-    const expertCount = 5;
     const expertRadius = 6; // Radius of expert nodes
 
     for (let i = 0; i < expertCount; i++) {
@@ -91,7 +95,7 @@ const KnowledgeFlowVisualization = () => {
     const particles = [];
     if (animationState === 'returning' || animationState === 'complete') {
       expertPositions.forEach((pos, idx) => {
-        if (expertNodesActive[idx]) {
+        if (idx < expertNodesActive.length && expertNodesActive[idx]) {
           for (let i = 0; i < 3; i++) {
             const startHue = 260 + (idx * 15); // Base hue
             const endHue = startHue + 30; // Vary the hue
@@ -124,7 +128,7 @@ const KnowledgeFlowVisualization = () => {
       // Draw connection lines
       if (animationState !== 'initial') {
         expertPositions.forEach((pos, idx) => {
-          const progress = expertNodesActive[idx] ? 1 : Math.min((Date.now() % 3000) / 3000, 1);
+          const progress = idx < expertNodesActive.length && expertNodesActive[idx] ? 1 : Math.min((Date.now() % 3000) / 3000, 1);
           drawConnectionLine(ctx, centerX, centerY, pos, easeInOutQuad(progress), centerRadius, expertRadius);
         });
       }
@@ -227,7 +231,7 @@ const KnowledgeFlowVisualization = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [animationState, expertNodesActive]);
+  }, [animationState, expertNodesActive, expertCount]);
 
   return (
     <div className="w-full h-full flex items-center justify-center">
@@ -257,8 +261,8 @@ const KnowledgeFlowVisualization = () => {
                         ${animationState === 'complete' ? 'opacity-80' : 'opacity-50'}`}
           />
 
-          {/* Solid question mark or lightbulb */}
-          <div className="text-white text-2xl font-bold relative z-20">
+          {/* Q logo or lightbulb */}
+          <div className="text-white text-3xl font-bold relative z-20">
             {showLightbulb ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -269,14 +273,14 @@ const KnowledgeFlowVisualization = () => {
                 <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" />
               </svg>
             ) : (
-              '?'
+              'Q'
             )}
           </div>
         </div>
 
         {/* Expert nodes */}
-        {[0, 1, 2, 3, 4].map((index) => {
-          const angle = (index * 2 * Math.PI / 5) - Math.PI / 2;
+        {Array(expertCount).fill(0).map((_, index) => {
+          const angle = (index * 2 * Math.PI / expertCount) - Math.PI / 2;
           const radius = 180;
           const x = 300 + radius * Math.cos(angle);
           const y = 300 + radius * Math.sin(angle);
@@ -289,17 +293,17 @@ const KnowledgeFlowVisualization = () => {
               className={`absolute w-16 h-16 transform -translate-x-1/2 -translate-y-1/2
                          bg-purple-100 rounded-full flex items-center justify-center
                          transition-all duration-500
-                         ${expertNodesActive[index] ? 'bg-purple-500' : ''}`}
+                         ${index < expertNodesActive.length && expertNodesActive[index] ? 'bg-purple-500' : ''}`}
               style={{
                 left: `${divX}%`,
                 top: `${divY}%`,
-                boxShadow: expertNodesActive[index]
+                boxShadow: index < expertNodesActive.length && expertNodesActive[index]
                   ? '0 0 20px rgba(126, 34, 206, 0.5)'
                   : '0 0 5px rgba(126, 34, 206, 0.2)',
               }}
             >
               {/* Particle emission effect */}
-              {expertNodesActive[index] && animationState === 'returning' && (
+              {index < expertNodesActive.length && expertNodesActive[index] && animationState === 'returning' && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-full h-full absolute animate-ripple rounded-full bg-purple-400 opacity-20" />
                 </div>
@@ -309,7 +313,7 @@ const KnowledgeFlowVisualization = () => {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
-                className={`w-6 h-6 ${expertNodesActive[index] ? 'text-white' : 'text-purple-700'}`}
+                className={`w-6 h-6 ${index < expertNodesActive.length && expertNodesActive[index] ? 'text-white' : 'text-purple-700'}`}
               >
                 <path
                   fill="currentColor"

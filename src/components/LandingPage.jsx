@@ -89,9 +89,8 @@ const LandingPage = () => {
           <div className="flex flex-col justify-center space-y-8 max-w-2xl">
             {/* Headline with highlighted word */}
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Streamline your expert <br />
-              research from <span className="text-purple-600">inquiry</span> <br />
-              to insight
+              Streamline your expert research from<br />
+               <span className="text-purple-600">inquiry</span> to insight
             </h1>
             
             {/* Subtext */}
