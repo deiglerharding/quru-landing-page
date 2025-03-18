@@ -1,4 +1,4 @@
-// src/components/Footer.jsx
+// src/components/sections/Footer.jsx
 import React from 'react';
 import ReactGA from 'react-ga4';
 
@@ -127,6 +127,15 @@ const Footer = () => {
                   >
                     Get Started
                   </button>
+                </li>
+                <li>
+                  <a 
+                    href="/faq" 
+                    onClick={() => trackFooterClick('FAQ')}
+                    className="text-sm text-gray-600 hover:text-purple-900"
+                  >
+                    FAQ
+                  </a>
                 </li>
                 <li>
                   <a 

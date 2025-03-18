@@ -8,6 +8,9 @@ const TopNavigationBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const signInRef = useRef(null);
   
+  // Check if we're on the FAQ page
+  const isFaqPage = window.location.pathname.toLowerCase() === '/faq';
+  
   // Track scrolling to add shadow when user scrolls down
   useEffect(() => {
     const handleScroll = () => {
@@ -34,24 +37,33 @@ const TopNavigationBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Handle smooth scrolling to sections
+  // Handle smooth scrolling to sections (only on main page)
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80, // Adjusted for navbar height
-        behavior: 'smooth'
-      });
-      
-      // Track navigation clicks
-      ReactGA.event({
-        category: 'Navigation',
-        action: 'Click',
-        label: sectionId
-      });
-      
-      // Close mobile menu after clicking
-      setIsMobileMenuOpen(false);
+    if (!isFaqPage) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 80, // Adjusted for navbar height
+          behavior: 'smooth'
+        });
+        
+        // Track navigation clicks
+        ReactGA.event({
+          category: 'Navigation',
+          action: 'Click',
+          label: sectionId
+        });
+      }
+    }
+    
+    // Close mobile menu after clicking
+    setIsMobileMenuOpen(false);
+  };
+
+  // Handle homepage navigation
+  const navigateToHome = () => {
+    if (isFaqPage) {
+      window.location.href = '/';
     }
   };
 
@@ -88,40 +100,45 @@ const TopNavigationBar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <div className="text-3xl font-bold text-purple-900">
+            <div 
+              className="text-3xl font-bold text-purple-900 cursor-pointer"
+              onClick={navigateToHome}
+            >
               QuruAI
             </div>
           </div>
           
-          {/* Navigation Links - Desktop */}
-          <div className="hidden md:flex items-center justify-center absolute left-0 right-0 mx-auto pointer-events-none">
-            <div className="flex items-center space-x-8 pointer-events-auto">
-              <button 
-                onClick={() => scrollToSection('product-section')}
-                className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
-              >
-                Product
-              </button>
-              <button 
-                onClick={() => scrollToSection('compliance-section')}
-                className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
-              >
-                Compliance
-              </button>
-              <button 
-                onClick={() => scrollToSection('about-section')}
-                className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
-              >
-                About Us
-              </button>
-              <button 
-                onClick={() => scrollToSection('experts-section')}
-                className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
-              >
-                Experts
-              </button>
+          {/* Navigation Links - Desktop - Only show on main page */}
+          {!isFaqPage && (
+            <div className="hidden md:flex items-center justify-center absolute left-0 right-0 mx-auto pointer-events-none">
+              <div className="flex items-center space-x-8 pointer-events-auto">
+                <button 
+                  onClick={() => scrollToSection('product-section')}
+                  className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
+                >
+                  Product
+                </button>
+                <button 
+                  onClick={() => scrollToSection('compliance-section')}
+                  className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
+                >
+                  Compliance
+                </button>
+                <button 
+                  onClick={() => scrollToSection('about-section')}
+                  className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
+                >
+                  About Us
+                </button>
+                <button 
+                  onClick={() => scrollToSection('experts-section')}
+                  className="text-gray-600 hover:text-purple-900 font-medium transition-colors duration-200"
+                >
+                  Experts
+                </button>
+              </div>
             </div>
-          </div>
+          )}
           
           {/* Right Side Buttons - Desktop */}
           <div className="hidden md:flex items-center space-x-4 z-10">
@@ -187,7 +204,7 @@ const TopNavigationBar = () => {
             </button>
           </div>
           
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Only show on main page for navigation, always show for Sign In/Get Started */}
           <div className="md:hidden flex items-center">
             <button 
               onClick={toggleMobileMenu}
@@ -211,33 +228,47 @@ const TopNavigationBar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white shadow-lg pt-2 pb-4">
-          {/* Navigation Links */}
-          <div className="px-4 space-y-4">
-            <button 
-              onClick={() => scrollToSection('product-section')}
-              className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
-            >
-              Product
-            </button>
-            <button 
-              onClick={() => scrollToSection('compliance-section')}
-              className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
-            >
-              Compliance
-            </button>
-            <button 
-              onClick={() => scrollToSection('about-section')}
-              className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
-            >
-              About Us
-            </button>
-            <button 
-              onClick={() => scrollToSection('experts-section')}
-              className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
-            >
-              Experts
-            </button>
-          </div>
+          {/* Navigation Links - Only show on main page */}
+          {!isFaqPage && (
+            <div className="px-4 space-y-4">
+              <button 
+                onClick={() => scrollToSection('product-section')}
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
+              >
+                Product
+              </button>
+              <button 
+                onClick={() => scrollToSection('compliance-section')}
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
+              >
+                Compliance
+              </button>
+              <button 
+                onClick={() => scrollToSection('about-section')}
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
+              >
+                About Us
+              </button>
+              <button 
+                onClick={() => scrollToSection('experts-section')}
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
+              >
+                Experts
+              </button>
+            </div>
+          )}
+          
+          {/* On FAQ page, show a Home link instead of section links */}
+          {isFaqPage && (
+            <div className="px-4 space-y-4">
+              <button 
+                onClick={navigateToHome}
+                className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-900 rounded-md transition-colors duration-200"
+              >
+                Home
+              </button>
+            </div>
+          )}
           
           {/* Sign In Options */}
           <div className="mt-4 border-t border-gray-200 pt-4 px-4 space-y-2">
