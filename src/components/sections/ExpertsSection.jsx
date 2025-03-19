@@ -82,7 +82,7 @@ const ExpertsSection = ({ onOpenExpertModal }) => {
             Join Our Expert Network
           </button>
           <p className="text-xs text-gray-500 mt-4">No minimum time commitment required</p>
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-xs text-gray-600 mt-2">
             <a href="/faq" className="text-purple-800 hover:text-purple-600 hover:underline transition-colors">
               View our expert FAQ
             </a>
