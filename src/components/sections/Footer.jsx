@@ -3,6 +3,9 @@ import React from 'react';
 import ReactGA from 'react-ga4';
 
 const Footer = () => {
+  // Check if current path is /faq
+  const isFaqPage = window.location.pathname.toLowerCase() === '/faq';
+
   // Track clicks on footer links
   const trackFooterClick = (label) => {
     ReactGA.event({
@@ -36,56 +39,76 @@ const Footer = () => {
           
           {/* Navigation Links - With column labels */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-6 mb-6 md:mb-0">
-            {/* Navigation Column */}
-            <div>
-              <h3 className="text-sm font-semibold text-purple-900 mb-3">Navigation</h3>
-              <ul className="space-y-2">
-                <li>
-                  <button 
-                    onClick={() => {
-                      document.getElementById('product-section').scrollIntoView({ behavior: 'smooth' });
-                      trackFooterClick('Product');
-                    }}
-                    className="text-sm text-gray-600 hover:text-purple-900"
-                  >
-                    Product
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => {
-                      document.getElementById('compliance-section').scrollIntoView({ behavior: 'smooth' });
-                      trackFooterClick('Compliance');
-                    }}
-                    className="text-sm text-gray-600 hover:text-purple-900"
-                  >
-                    Compliance
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => {
-                      document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
-                      trackFooterClick('About Us');
-                    }}
-                    className="text-sm text-gray-600 hover:text-purple-900"
-                  >
-                    About Us
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => {
-                      document.getElementById('experts-section').scrollIntoView({ behavior: 'smooth' });
-                      trackFooterClick('Experts');
-                    }}
-                    className="text-sm text-gray-600 hover:text-purple-900"
-                  >
-                    Experts
-                  </button>
-                </li>
-              </ul>
-            </div>
+            {/* Navigation Column - Only show on main page */}
+            {!isFaqPage && (
+              <div>
+                <h3 className="text-sm font-semibold text-purple-900 mb-3">Navigation</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <button 
+                      onClick={() => {
+                        document.getElementById('product-section').scrollIntoView({ behavior: 'smooth' });
+                        trackFooterClick('Product');
+                      }}
+                      className="text-sm text-gray-600 hover:text-purple-900"
+                    >
+                      Product
+                    </button>
+                  </li>
+                  <li>
+                    <button 
+                      onClick={() => {
+                        document.getElementById('compliance-section').scrollIntoView({ behavior: 'smooth' });
+                        trackFooterClick('Compliance');
+                      }}
+                      className="text-sm text-gray-600 hover:text-purple-900"
+                    >
+                      Compliance
+                    </button>
+                  </li>
+                  <li>
+                    <button 
+                      onClick={() => {
+                        document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
+                        trackFooterClick('About Us');
+                      }}
+                      className="text-sm text-gray-600 hover:text-purple-900"
+                    >
+                      About Us
+                    </button>
+                  </li>
+                  <li>
+                    <button 
+                      onClick={() => {
+                        document.getElementById('experts-section').scrollIntoView({ behavior: 'smooth' });
+                        trackFooterClick('Experts');
+                      }}
+                      className="text-sm text-gray-600 hover:text-purple-900"
+                    >
+                      Experts
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+            
+            {/* Home link when on FAQ page */}
+            {isFaqPage && (
+              <div>
+                <h3 className="text-sm font-semibold text-purple-900 mb-3">Navigation</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a 
+                      href="/"
+                      className="text-sm text-gray-600 hover:text-purple-900"
+                      onClick={() => trackFooterClick('Home')}
+                    >
+                      Home
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            )}
             
             {/* Account Column */}
             <div>
