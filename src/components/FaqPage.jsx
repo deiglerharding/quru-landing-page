@@ -22,7 +22,7 @@ const FaqPage = () => {
     },
     {
       question: "How is my rate set?",
-      answer: "Currently, every expert on the platform is paid a flat rate of $300 per hour (prorated by the minute). In the future, we plan to offer you the ability to set your own rate along with tools to help you determine competitive pricing for your services."
+      answer: "As an expert, you can choose your own hourly rate, anywhere between $50 and $1200. The typical rate across our network is around $200 per hour, but clients consider a variety of factors—such as experience, seniority, and your chosen rate—when deciding which expert to route their questions to."
     },
     {
       question: "Am I only getting paid for my time talking, or for the entire length of the call?",
